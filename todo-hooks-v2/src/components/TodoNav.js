@@ -1,10 +1,18 @@
 import React, { memo } from 'react';
 import './TodoNav.css';
 
-const TodoNav = memo(( { navState, navId, navValue } ) => {
+const TodoNav = memo(( { navState, navs, setNavState } ) => {
+
+  const onClickNav = (e) => {
+    setNavState(e.target.id);
+  };
 
   return (
-      <li id={navId} className={navState === navId ? 'active' : null}>{navValue}</li>
+    <ul className="nav" onClick={onClickNav}>
+      {navs.map(nav => 
+        <li key={nav.id} id={nav.id} className={navState === nav.id ? 'active' : null}>{nav.value}</li>
+      )}
+    </ul>
   );
 });
 

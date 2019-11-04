@@ -1,7 +1,23 @@
 import React, { memo } from 'react';
 import './TodoFooter.css';
 
-const TodoFooter = memo(({ allCheck, clearCompleted, getCompleted, getLefted }) => {
+const TodoFooter = memo(({ todos, setTodos }) => {
+
+  const allCheck = (e) => {
+    setTodos(todos.map(todo=> ({...todo, completed: e.target.checked})));
+  }
+
+  const clearCompleted = () => {
+    setTodos(todos.filter(todo => todo.completed !== true ));
+  }
+
+  const getCompleted = () => {
+    return todos.filter(todo => todo.completed === true).length;
+  };
+
+  const getLefted = () => {
+    return todos.filter(todo => todo.completed !== true).length;
+  };
 
   return(
     <div className="footer">
