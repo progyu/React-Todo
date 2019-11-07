@@ -28,4 +28,4 @@ const TodoFooter = ({ todos, onToggleAll, onClear }) => {
 	);
 };
 
-export default TodoFooter;
+export default React.memo(TodoFooter);

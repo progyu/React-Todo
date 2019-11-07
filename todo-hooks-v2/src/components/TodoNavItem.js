@@ -14,4 +14,4 @@ const TodoNavItem = ({ navItem, navState, onchageNav }) => {
 	);
 };
 
-export default TodoNavItem;
+export default React.memo(TodoNavItem);

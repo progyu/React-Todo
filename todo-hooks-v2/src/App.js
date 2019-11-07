@@ -9,10 +9,23 @@ import TodoFooter from './components/TodoFooter';
 import './App.css';
 
 const App = () => {
-	const [todos, setTodos] = useState([]);
+	function createBulkTodos () {
+		const array = [];
+		for(let i = 0; i < 2000; i++) {
+			const todo = {
+				id: i,
+				content: `todo ${i}`,
+				completed: false,
+			};
+			array.push(todo);
+		}
+		return array;
+	}
+
+	const [todos, setTodos] = useState(createBulkTodos);
 	const [navState, setNavState] = useState('All');
 
-	const nextId = useRef(1);
+	const nextId = useRef(1001);
 
 	const onInsert = content => {
 		const todo = {

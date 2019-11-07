@@ -13,4 +13,4 @@ const TodoToggle = props => {
 	);
 };
 
-export default TodoToggle;
+export default React.memo(TodoToggle);
