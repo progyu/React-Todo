@@ -65,7 +65,7 @@ const TodoTemplate = () => {
 	const getLefted = () => {
 		return todos.filter(todo => todo.completed !== true).length;
 	};
-
+	
 	const renderTodoList = () => {
 		let filtered = [];
 

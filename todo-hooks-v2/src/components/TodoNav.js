@@ -1,19 +1,22 @@
-import React, { memo } from 'react';
+import React from 'react';
+import TodoNavItem from './TodoNavItem';
 import './TodoNav.css';
 
-const TodoNav = memo(( { navState, navs, setNavState } ) => {
+const TodoNav = ({ navState, onchageNav }) => {
+	const navItems = ['All', 'Active', 'Completed'];
 
-  const onClickNav = (e) => {
-    setNavState(e.target.id);
-  };
-
-  return (
-    <ul className="nav" onClick={onClickNav}>
-      {navs.map(nav => 
-        <li key={nav.id} id={nav.id} className={navState === nav.id ? 'active' : null}>{nav.value}</li>
-      )}
-    </ul>
-  );
-});
+	return (
+		<ul className="nav">
+			{navItems.map(navItem => (
+				<TodoNavItem
+					key={navItem}
+					navItem={navItem}
+					navState={navState}
+					onchageNav={onchageNav}
+				/>
+			))}
+		</ul>
+	);
+};
 
 export default TodoNav;
