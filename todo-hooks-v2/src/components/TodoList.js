@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import TodoListItem from './TodoListItem';
 
 const TodoList = ({ todos, navState, onToggle, onRemove }) => {
-	const filterTodoList = () => {
+	const filterTodoList = useCallback(() => {
 		return todos.filter(todo => {
 			if (navState === 'Active') return !todo.completed;
 			if (navState === 'Completed') return todo.completed;
 			return true;
 		});
-	};
+	}, [todos, navState]);
 
 	return (
 		<ul className="todos">

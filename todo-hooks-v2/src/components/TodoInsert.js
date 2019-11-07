@@ -1,18 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import './TodoInsert.css';
 
 const TodoInsert = ({ onInsert }) => {
 	const [value, setValue] = useState('');
 
-	const onChangeInput = e => {
+	const onChangeInput = useCallback(e => {
 		setValue(e.target.value);
-	};
+	}, []);
 
-	const onSubmitForm = e => {
-		onInsert(value);
-		setValue('');
-		e.preventDefault();
-	};
+	const onSubmitForm = useCallback(
+		e => {
+			e.preventDefault();
+			if (!value.trim()) return;
+			onInsert(value);
+			setValue('');
+		},
+		[onInsert, value],
+	);
 
 	return (
 		<form onSubmit={onSubmitForm}>

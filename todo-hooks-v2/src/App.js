@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 
 import TodoTemplate from './components/TodoTemplate';
 import TodoInsert from './components/TodoInsert';
@@ -9,9 +9,9 @@ import TodoFooter from './components/TodoFooter';
 import './App.css';
 
 const App = () => {
-	function createBulkTodos () {
+	function createBulkTodos() {
 		const array = [];
-		for(let i = 0; i < 2000; i++) {
+		for (let i = 0; i < 2000; i++) {
 			const todo = {
 				id: i,
 				content: `todo ${i}`,
@@ -27,39 +27,39 @@ const App = () => {
 
 	const nextId = useRef(1001);
 
-	const onInsert = content => {
+	const onInsert = useCallback(content => {
 		const todo = {
 			id: nextId.current,
 			content,
 			completed: false,
 		};
-		setTodos(todos.concat(todo));
+		setTodos(todos => todos.concat(todo));
 		nextId.current += 1;
-	};
+	}, []);
 
-	const onchageNav = navState => {
-		setNavState(navState);
-	};
+	const onchageNav = useCallback(nav => {
+		setNavState(navState => nav);
+	}, []);
 
-	const onToggle = id => {
-		setTodos(
+	const onToggle = useCallback(id => {
+		setTodos(todos=>
 			todos.map(todo =>
 				todo.id === id ? { ...todo, completed: !todo.completed } : todo,
 			),
 		);
-	};
+	},[]);
 
-	const onRemove = id => {
-		setTodos(todos.filter(todo => todo.id !== id));
-	};
+	const onRemove = useCallback(id => {
+		setTodos(todos => todos.filter(todo => todo.id !== id));
+	},[]);
 
-	const onToggleAll = e => {
-		setTodos(todos.map(todo => ({ ...todo, completed: e.target.checked })));
-	};
+	const onToggleAll = useCallback(check => {
+		setTodos(todos => todos.map(todo => ({ ...todo, completed: check })));
+	},[]);
 
-	const onClear = () => {
-		setTodos(todos.filter(todo => todo.completed !== true));
-	};
+	const onClear = useCallback(() => {
+		setTodos(todos => todos.filter(todo => todo.completed !== true));
+	},[]);
 
 	return (
 		<TodoTemplate>
