@@ -25,7 +25,7 @@ const App = () => {
 	const [todos, setTodos] = useState(createBulkTodos);
 	const [navState, setNavState] = useState('All');
 
-	const nextId = useRef(1001);
+	const nextId = useRef(2001);
 
 	const onInsert = useCallback(content => {
 		const todo = {
