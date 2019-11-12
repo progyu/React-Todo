@@ -1,123 +1,167 @@
 import React, { Component } from 'react';
-import TodoList from './TodoList';
-import TodoNav from './TodoNav';
 import './TodoTemplate.css';
 
 class TodoTemplate extends Component {
-  state = {
-    todos: [],
-    value: '',
-    navState: 'all',
-    navs : [
-      {id: 'all', value: 'All' },
-      {id: 'active', value: 'Active' },
-      {id: 'completed', value: 'Completed' },
-    ]
-  };
+	state = {
+		todos: [],
+		value: '',
+		navState: 'All',
+	};
 
-  getId = () => {
-    const { todos } = this.state;
-    return todos.length ? Math.max(...todos.map(({ id }) => id)) +1 : 1;
-  };
-  
-  delTodo = (e) => {
-    const { todos } = this.state;
-    if(!e.target.classList.contains('remove-todo')) return;
-    this.setState({todos: todos.filter(todo=> todo.id !== +e.target.parentNode.id)});
-  };
+	navs = ['All', 'Active', 'Completed'];
 
-  changeCheck = (e) => {
-    const { todos } = this.state;
-    this.setState({todos: todos.map(todo => todo.id === +e.target.parentNode.id ? ({...todo, completed: !todo.completed}) : todo)});
-  };
+	getId = () => {
+		const { todos } = this.state;
+		return todos.length ? Math.max(...todos.map(({ id }) => id)) + 1 : 1;
+	};
 
-  allCheck = (e) => {
-    const { todos } = this.state;
-    this.setState({todos: todos.map(todo=> ({...todo, completed: e.target.checked}))});
-  };
+	delTodo = e => {
+		const { todos } = this.state;
+		if (!e.target.classList.contains('remove-todo')) return;
+		this.setState({
+			todos: todos.filter(todo => todo.id !== +e.target.parentNode.id),
+		});
+	};
 
-  clearCompleted = () => {
-    const { todos } = this.state;
-    this.setState({todos: todos.filter(todo=>todo.completed !== true)});
-  };
+	changeCheck = e => {
+		const { todos } = this.state;
+		this.setState({
+			todos: todos.map(todo =>
+				todo.id === +e.target.parentNode.id
+					? { ...todo, completed: !todo.completed }
+					: todo,
+			),
+		});
+	};
 
-  onChangeInput = (e) => {
-    const { value } = this.state;
-    this.setState({value: e.target.value});
-  };
+	allCheck = e => {
+		const { todos } = this.state;
+		this.setState({
+			todos: todos.map(todo => ({ ...todo, completed: e.target.checked })),
+		});
+	};
 
-  onSubmitForm = (e) => {
-    const { todos , value } = this.state;
-    e.preventDefault();
-    if(!(value.trim())) return;
-    this.setState({todos: [...todos, { id: this.getId(), content: value, completed: false}]});
-    this.setState({value: ''});
-  };
+	clearCompleted = () => {
+		const { todos } = this.state;
+		this.setState({ todos: todos.filter(todo => todo.completed !== true) });
+	};
 
-  getCompleted = () => {
-    const { todos } = this.state;
-    return todos.filter(todo => todo.completed === true).length;
-  };
+	onChangeInput = e => {
+		this.setState({ value: e.target.value });
+	};
 
-  getLefted = () => {
-    const { todos } = this.state;
-    return todos.filter(todo => todo.completed !== true).length;
-  };
+	onSubmitForm = e => {
+		const { todos, value } = this.state;
+		e.preventDefault();
+		if (!value.trim()) return;
+		this.setState({
+			todos: [...todos, { id: this.getId(), content: value, completed: false }],
+		});
+		this.setState({ value: '' });
+	};
 
-  onClickNav = (e) => {
-    const { navState } = this.state;
-    this.setState({navState: e.target.id});
-  };
+	getCompleted = () => {
+		const { todos } = this.state;
+		return todos.filter(todo => todo.completed === true).length;
+	};
 
-  renderTodoList= () => {
-    const { todos, navState } = this.state;
-    let filtered = [];
-    
-    filtered = todos.filter(({ completed }) => navState === 'active' ? completed === false : completed === true);
+	getLefted = () => {
+		const { todos } = this.state;
+		return todos.filter(todo => todo.completed !== true).length;
+	};
 
-    return filtered.map(todo => 
-      <TodoList key={todo.id + todo.content} todoInfo={todo} changeHandler={this.changeCheck}/>
-    )
-  };
+	onClickNav = e => {
+		this.setState({ navState: e.target.id });
+	};
 
-  render() {
-    const {onSubmitForm, onChangeInput, changeCheck, onClickNav, delTodo, allCheck, clearCompleted, getCompleted, getLefted, renderTodoList} = this;
-    const { todos, value, navState, navs } = this.state;
-    return (
-      <>
-        <div className="container">
-          <h1 className="title">Todos</h1>
-          <div className="ver">1.0</div>
+	renderTodoList = () => {
+		const { todos, navState } = this.state;
+		return todos.filter(todo => {
+			if (navState === 'Active') return !todo.completed;
+			if (navState === 'Completed') return todo.completed;
+			return true;
+		});
+	};
 
-          <form onSubmit={onSubmitForm}>
-            <input className="input-todo" placeholder="What needs to be done?" onChange={onChangeInput} value={value} autoFocus />
-          </form>
-          <ul className="nav" onClick={onClickNav}>
-            {navs.map(nav => {
-              return (
-                <TodoNav key={nav.id} navId={nav.id}  navValue={nav.value} navState={navState} />
-              );
-            })}
-          </ul>
+	render() {
+		const {
+			onSubmitForm,
+			onChangeInput,
+			changeCheck,
+			onClickNav,
+			delTodo,
+			allCheck,
+			clearCompleted,
+			getCompleted,
+			getLefted,
+			renderTodoList,
+			navs,
+		} = this;
+		const { value, navState } = this.state;
+		return (
+			<>
+				<div className="container">
+					<h1 className="title">Todos</h1>
+					<div className="ver">1.0</div>
 
-          <ul className="todos" onClick={delTodo}>
-            {navState === 'all' ? (todos.map(todo => 
-              <TodoList key={todo.id + todo.content} todoInfo={todo} changeHandler={changeCheck}/>)) : (renderTodoList())}
-          </ul>
-          <div className="footer">
-            <div className="complete-all">
-              <input className="custom-checkbox" type="checkbox" id="ck-complete-all" onChange={allCheck} />
-              <label htmlFor="ck-complete-all">Mark all as complete</label>
-            </div>
-            <div className="clear-completed">
-              <button className="btn" onClick={clearCompleted}>Clear completed (<span className="completed-todos">{getCompleted()}</span>)</button>
-              <strong className="active-todos">{getLefted()}</strong> items left
-            </div>
-          </div>
-        </div>
-      </>
-    );
- }
+					<form onSubmit={onSubmitForm}>
+						<input
+							className="input-todo"
+							placeholder="What needs to be done?"
+							onChange={onChangeInput}
+							value={value}
+							autoFocus
+						/>
+					</form>
+					<ul className="nav" onClick={onClickNav}>
+						{navs.map(nav => (
+							<li
+								key={nav}
+								id={nav}
+								className={navState === nav ? 'active' : null}
+							>
+								{nav}
+							</li>
+						))}
+					</ul>
+
+					<ul className="todos" onClick={delTodo}>
+						{renderTodoList().map(todo => (
+							<li key={todo.id} id={todo.id} className="todo-item">
+								<input
+									className="custom-checkbox"
+									type="checkbox"
+									id={`ck-${todo.id}`}
+									onChange={changeCheck}
+									checked={todo.completed}
+								/>
+								<label htmlFor={`ck-${todo.id}`}>{todo.content}</label>
+								<i className="remove-todo far fa-times-circle"></i>
+							</li>
+						))}
+					</ul>
+					<div className="footer">
+						<div className="complete-all">
+							<input
+								className="custom-checkbox"
+								type="checkbox"
+								id="ck-complete-all"
+								onChange={allCheck}
+							/>
+							<label htmlFor="ck-complete-all">Mark all as complete</label>
+						</div>
+						<div className="clear-completed">
+							<button className="btn" onClick={clearCompleted}>
+								Clear completed (
+								<span className="completed-todos">{getCompleted()}</span>)
+							</button>
+							<strong className="active-todos">{getLefted()}</strong> items left
+						</div>
+					</div>
+				</div>
+			</>
+		);
+	}
 }
 
 export default TodoTemplate;
