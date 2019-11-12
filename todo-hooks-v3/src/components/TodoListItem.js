@@ -1,6 +1,6 @@
 import React, { useContext, useCallback } from 'react';
 import TodoToggle from './TodoToggle';
-import './TodoListItem.css';
+import './TodoListItem.scss';
 import { Context } from '../contexts/context';
 
 const TodoListItem = ({ todo }) => {

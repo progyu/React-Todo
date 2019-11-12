@@ -1,6 +1,6 @@
 import React, { useState, useRef, useCallback, useContext } from 'react';
 import { Context } from '../contexts/context';
-import './TodoInsert.css';
+import './TodoInsert.scss';
 
 const TodoInsert = () => {
 	const [value, setValue] = useState('');

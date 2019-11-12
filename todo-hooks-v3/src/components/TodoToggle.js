@@ -1,5 +1,5 @@
 import React from 'react';
-import './TodoToggle.css';
+import './TodoToggle.scss';
 
 const TodoToggle = props => {
 	return (

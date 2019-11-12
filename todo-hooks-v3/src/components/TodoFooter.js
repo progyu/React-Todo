@@ -1,7 +1,7 @@
 import React, { useCallback, useContext } from 'react';
 import TodoToggle from './TodoToggle';
 import { Context } from '../contexts/context';
-import './TodoFooter.css';
+import './TodoFooter.scss';
 
 const TodoFooter = () => {
 	const { state, actions } = useContext(Context);

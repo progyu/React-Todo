@@ -1,6 +1,6 @@
 import React from 'react';
 import TodoNavItem from './TodoNavItem';
-import './TodoNav.css';
+import './TodoNav.scss';
 
 const TodoNav = () => {
 	const navItems = ['All', 'Active', 'Completed'];

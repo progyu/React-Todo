@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Context } from '../contexts/context';
 import cn from 'classnames';
-import './TodoNavItem.css';
+import './TodoNavItem.scss';
 
 const TodoNavItem = ({ navItem }) => {
 	const { state, actions } = useContext(Context);

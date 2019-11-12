@@ -1,0 +1,22 @@
+$templateColor: #23b7e5;
+$weight: 100;
+
+.container {
+  max-width: 750px;
+  min-width: 450px;
+  margin: 0 auto;
+  padding: 15px;
+  .title {
+    font-size: 4.5em;
+    font-weight: $weight;
+    text-align: center;
+    color: $templateColor;
+  }
+  
+  .ver {
+    font-weight: $weight;
+    text-align: center;
+    color: $templateColor;
+    margin-bottom: 30px;
+  }
+}
