@@ -1,3 +1,5 @@
+@import 'utils.scss';
+
 /*
   .custom-checkbox
   custom-checkbox 바로 뒤에 위치한 label의 before와 after를 사용해
@@ -39,6 +41,6 @@
     @include layouts(6);
     width: 10px;
     height: 10px;
-    background-color: #23b7e5;
+    background-color: $themeColor;
   }
 }

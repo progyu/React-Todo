@@ -1,4 +1,5 @@
-$templateColor: #23b7e5;
+@import 'utils.scss';
+
 $weight: 100;
 
 .container {
@@ -10,13 +11,13 @@ $weight: 100;
     font-size: 4.5em;
     font-weight: $weight;
     text-align: center;
-    color: $templateColor;
+    color:  $themeColor;
   }
   
   .ver {
     font-weight: $weight;
     text-align: center;
-    color: $templateColor;
+    color:  $themeColor;
     margin-bottom: 30px;
   }
 }
