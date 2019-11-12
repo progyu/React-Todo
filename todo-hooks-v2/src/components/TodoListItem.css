@@ -20,7 +20,7 @@
 }
 
 /* .remove-todo button */
-.remove-todo {
+.todo-item .remove-todo {
   display: none;
   position: absolute;
   top: 50%;
