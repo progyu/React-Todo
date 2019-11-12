@@ -1,19 +1,29 @@
 import React, { Component } from 'react';
-import './TodoList.css';
+import TodoListItem from './TodoListItem';
 
-class TodoList extends Component{
-  
-  render() {
-    const { todoInfo, changeHandler } = this.props;
+class TodoList extends Component {
+	render() {
+		const { todos, navState, onToggle, onRemove } = this.props;
 
-    return (
-      <li id={todoInfo.id} className="todo-item">
-        <input className="custom-checkbox" type="checkbox" id={`ck-${todoInfo.id}`} onChange={changeHandler} checked={todoInfo.completed} />
-        <label htmlFor={`ck-${todoInfo.id}`}>{todoInfo.content}</label>
-        <i className="remove-todo far fa-times-circle"></i>
-      </li>
-    );
-  }
+		return (
+			<ul className="todos">
+				{todos
+					.filter(todo => {
+						if (navState === 'Active') return !todo.completed;
+						if (navState === 'Completed') return todo.completed;
+						return true;
+					})
+					.map(todo => (
+						<TodoListItem
+							key={todo.id}
+							todo={todo}
+							onToggle={onToggle}
+							onRemove={onRemove}
+						/>
+					))}
+			</ul>
+		);
+	}
 }
 
 export default TodoList;
