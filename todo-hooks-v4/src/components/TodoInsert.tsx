@@ -1,32 +1,30 @@
-import React, { useState, useRef, useCallback, useContext } from 'react';
-import { Context } from '../contexts/context';
+import React, { useState, useRef, useCallback } from 'react';
+import { useTodosDispatch } from '../contexts/context';
 import './TodoInsert.scss';
 
 const TodoInsert = () => {
 	const [value, setValue] = useState('');
-	const { actions } = useContext(Context);
+	const dispatch = useTodosDispatch();
 
-	const nextId = useRef(2001);
-
-	const onChangeInput = useCallback(e => {
-		setValue(e.target.value);
-	}, []);
+	const onChangeInput = useCallback(
+		(e: React.ChangeEvent<HTMLInputElement>) => {
+			setValue(e.target.value);
+		},
+		[],
+	);
 
 	const onInsert = useCallback(
-		content => {
-			const todo = {
-				id: nextId.current,
+		(content: string) => {
+			dispatch({
+				type: 'CREATE',
 				content,
-				completed: false,
-			};
-			actions.setTodos(todos => todos.concat(todo));
-			nextId.current += 1;
+			});
 		},
-		[actions],
+		[dispatch],
 	);
 
 	const onSubmitForm = useCallback(
-		e => {
+		(e: React.FormEvent) => {
 			e.preventDefault();
 			if (!value.trim()) return;
 			onInsert(value);

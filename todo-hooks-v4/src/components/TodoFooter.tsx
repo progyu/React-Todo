@@ -1,38 +1,45 @@
 import React, { useCallback, useContext } from 'react';
 import TodoToggle from './TodoToggle';
-import { Context } from '../contexts/context';
+import { useTodosState, useTodosDispatch } from '../contexts/context';
 import './TodoFooter.scss';
 
 const TodoFooter = () => {
-	const { state, actions } = useContext(Context);
+	const todos = useTodosState();
+	const dispatch = useTodosDispatch();
 
 	const getCompleted = useCallback(() => {
-		return state.todos.filter(todo => todo.completed === true).length;
-	}, [state.todos]);
+		return todos.filter(todo => todo.completed === true).length;
+	}, [todos]);
 
 	const getLefted = useCallback(() => {
-		return state.todos.filter(todo => todo.completed !== true).length;
-	}, [state.todos]);
+		return todos.filter(todo => todo.completed !== true).length;
+	}, [todos]);
 
 	const onToggleAll = useCallback(
-		check => {
-			actions.setTodos(todos =>
-				todos.map(todo => ({ ...todo, completed: check })),
-			);
+		(completed: boolean) => {
+			dispatch({
+				type: 'TOGGLEALL',
+				completed,
+			});
 		},
-		[actions],
+		[dispatch],
 	);
 
 	const onClear = useCallback(() => {
-		actions.setTodos(todos => todos.filter(todo => todo.completed !== true));
-	}, [actions]);
+		dispatch({
+			type: 'REMOVEALL',
+			completed: true,
+		});
+	}, [dispatch]);
 
 	return (
 		<div className="footer">
 			<div className="complete-all">
 				<TodoToggle
 					id="ck-complete-all"
-					onChange={e => onToggleAll(e.target.checked)}
+					onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+						onToggleAll(e.target.checked)
+					}
 				/>
 				<label htmlFor="ck-complete-all">Mark all as complete</label>
 			</div>

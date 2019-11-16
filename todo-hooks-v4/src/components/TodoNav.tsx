@@ -8,10 +8,7 @@ const TodoNav = () => {
 	return (
 		<ul className="nav">
 			{navItems.map(navItem => (
-				<TodoNavItem
-					key={navItem}
-					navItem={navItem}
-				/>
+				<TodoNavItem key={navItem} navItem={navItem} />
 			))}
 		</ul>
 	);

@@ -1,32 +1,38 @@
 import React, { useContext, useCallback } from 'react';
 import TodoToggle from './TodoToggle';
 import './TodoListItem.scss';
-import { Context } from '../contexts/context';
+import { useTodosDispatch, Todo } from '../contexts/context';
 
-const TodoListItem = ({ todo }) => {
-	const { actions } = useContext(Context);
+type TodoListProps = {
+	todo: Todo;
+};
+
+const TodoListItem = ({ todo }: TodoListProps) => {
+	const dispatch = useTodosDispatch();
 	const { id, content, completed } = todo;
 
 	const onToggle = useCallback(
-		id => {
-			actions.setTodos(todos =>
-				todos.map(todo =>
-					todo.id === id ? { ...todo, completed: !todo.completed } : todo,
-				),
-			);
+		(id: number) => {
+			dispatch({
+				type: 'TOGGLE',
+				id,
+			});
 		},
-		[actions],
+		[dispatch],
 	);
 
 	const onRemove = useCallback(
-		id => {
-			actions.setTodos(todos => todos.filter(todo => todo.id !== id));
+		(id: number) => {
+			dispatch({
+				type: 'REMOVE',
+				id,
+			});
 		},
-		[actions],
+		[dispatch],
 	);
 
 	return (
-		<li id={id} className="todo-item">
+		<li id={`${id}`} className="todo-item">
 			<TodoToggle
 				id={`ck-${todo.id}`}
 				onChange={() => onToggle(id)}
