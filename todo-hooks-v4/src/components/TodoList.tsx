@@ -1,13 +1,13 @@
 import React, { useCallback } from 'react';
 import TodoListItem from './TodoListItem';
-import { useTodosState, useNavsState } from '../contexts/context';
+import { useTodosState, useNavsState, Todo } from '../contexts/context';
 
 const TodoList = () => {
 	const todos = useTodosState();
 	const navState = useNavsState();
 
-	const filterTodoList = useCallback(() => {
-		return todos.filter(todo => {
+	const filterTodoList = useCallback((): Todo[] => {
+		return todos.filter((todo: Todo) => {
 			if (navState === 'Active') return !todo.completed;
 			if (navState === 'Completed') return todo.completed;
 			return true;
@@ -16,7 +16,7 @@ const TodoList = () => {
 
 	return (
 		<ul className="todos">
-			{filterTodoList().map(todo => (
+			{filterTodoList().map((todo: Todo) => (
 				<TodoListItem key={todo.id} todo={todo} />
 			))}
 		</ul>

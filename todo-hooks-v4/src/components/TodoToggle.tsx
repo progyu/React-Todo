@@ -1,13 +1,13 @@
 import React from 'react';
 import './TodoToggle.scss';
 
-type Prp = {
+type TodoToggleProps = {
 	checked?: boolean;
 	id: string;
 	onChange: any;
 };
 
-const TodoToggle = (props: Prp) => {
+const TodoToggle = (props: TodoToggleProps) => {
 	return (
 		<input
 			id={props.id}

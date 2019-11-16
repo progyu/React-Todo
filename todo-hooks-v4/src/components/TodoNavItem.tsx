@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import { useNavsState, useNavsDispatch, NavItem } from '../contexts/context';
+import { useNavsState, useNavsDispatch, NavState } from '../contexts/context';
 import cn from 'classnames';
 import './TodoNavItem.scss';
 
 type NavItemProps = {
-	navItem: NavItem;
+	navItem: NavState;
 };
 
 const TodoNavItem = ({ navItem }: NavItemProps) => {
 	const navs = useNavsState();
 	const dispatch = useNavsDispatch();
 
-	const onChangeNav = (navItem: string) => {
+	const onChangeNav = (navItem: NavState) => {
 		dispatch({
 			type: 'TAB',
 			navItem,

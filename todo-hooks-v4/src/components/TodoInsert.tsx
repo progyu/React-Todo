@@ -7,7 +7,7 @@ const TodoInsert = () => {
 	const dispatch = useTodosDispatch();
 
 	const onChangeInput = useCallback(
-		(e: React.ChangeEvent<HTMLInputElement>) => {
+		(e: React.ChangeEvent<HTMLInputElement>): void => {
 			setValue(e.target.value);
 		},
 		[],
@@ -24,7 +24,7 @@ const TodoInsert = () => {
 	);
 
 	const onSubmitForm = useCallback(
-		(e: React.FormEvent) => {
+		(e: React.FormEvent): void => {
 			e.preventDefault();
 			if (!value.trim()) return;
 			onInsert(value);

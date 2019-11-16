@@ -6,11 +6,9 @@ export type Todo = {
 	completed: boolean;
 };
 
-export type NavItem = string;
+export type NavState = 'All' | 'Active' | 'Completed';
 
 type TodosState = Todo[];
-
-type NavState = NavItem;
 
 // 상태전용 Context
 const TodosStateContext = createContext<TodosState | undefined>(undefined);
@@ -24,7 +22,7 @@ type Action =
 	| { type: 'TOGGLEALL'; completed: boolean }
 	| { type: 'REMOVEALL'; completed: boolean };
 
-type NavAction = { type: 'TAB'; navItem: string };
+type NavAction = { type: 'TAB'; navItem: NavState };
 
 type TodosDispatch = Dispatch<Action>;
 const TodosDispatchContext = createContext<TodosDispatch | undefined>(
@@ -60,7 +58,7 @@ function todosReducer(state: TodosState, action: Action): TodosState {
 	}
 }
 
-function navReducer(state: NavState, action: any): NavState {
+function navsReducer(state: NavState, action: NavAction): NavState {
 	switch (action.type) {
 		case 'TAB':
 			return (state = action.navItem);
@@ -108,7 +106,7 @@ export function NavsContextProvider({
 }: {
 	children: React.ReactNode;
 }) {
-	const [navs, dispatch] = useReducer(navReducer, 'All');
+	const [navs, dispatch] = useReducer(navsReducer, 'All');
 
 	return (
 		<NavsDispatchContext.Provider value={dispatch}>

@@ -7,11 +7,11 @@ const TodoFooter = () => {
 	const todos = useTodosState();
 	const dispatch = useTodosDispatch();
 
-	const getCompleted = useCallback(() => {
+	const getCompleted = useCallback((): number => {
 		return todos.filter(todo => todo.completed === true).length;
 	}, [todos]);
 
-	const getLefted = useCallback(() => {
+	const getLefted = useCallback((): number => {
 		return todos.filter(todo => todo.completed !== true).length;
 	}, [todos]);
 

@@ -1,9 +1,10 @@
 import React from 'react';
 import TodoNavItem from './TodoNavItem';
+import { NavState } from '../contexts/context';
 import './TodoNav.scss';
 
 const TodoNav = () => {
-	const navItems = ['All', 'Active', 'Completed'];
+	const navItems: NavState[] = ['All', 'Active', 'Completed'];
 
 	return (
 		<ul className="nav">
