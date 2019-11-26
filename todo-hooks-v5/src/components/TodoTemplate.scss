@@ -1,0 +1,23 @@
+@import 'utils.scss';
+
+$weight: 100;
+
+.container {
+  max-width: 750px;
+  min-width: 450px;
+  margin: 0 auto;
+  padding: 15px;
+  .title {
+    font-size: 4.5em;
+    font-weight: $weight;
+    text-align: center;
+    color:  $themeColor;
+  }
+  
+  .ver {
+    font-weight: $weight;
+    text-align: center;
+    color:  $themeColor;
+    margin-bottom: 30px;
+  }
+}
