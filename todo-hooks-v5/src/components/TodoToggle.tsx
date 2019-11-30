@@ -4,7 +4,7 @@ import './TodoToggle.scss';
 type TodoToggleProps = {
 	checked?: boolean;
 	id: string;
-	onChange: any;
+	onChange(e: React.ChangeEvent<HTMLInputElement>): void;
 };
 
 const TodoToggle = (props: TodoToggleProps) => {

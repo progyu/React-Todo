@@ -3,8 +3,13 @@ import TodoToggle from './TodoToggle';
 import { Todo } from '../modules/todos';
 import './TodoFooter.scss';
 
-const TodoFooter = ({todos, onToggleAll, onRemoveAll }: any) => {
+type Props = {
+	todos: Todo[];
+	onToggleAll(completed: boolean): void;
+	onRemoveAll(): void;
+};
 
+const TodoFooter = ({ todos, onToggleAll, onRemoveAll }: Props) => {
 	const getCompleted = useCallback((): number => {
 		return todos.filter((todo: Todo) => todo.completed === true).length;
 	}, [todos]);

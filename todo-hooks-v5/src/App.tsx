@@ -11,10 +11,10 @@ import './App.css';
 const App = () => {
 	return (
 		<TodoTemplate>
-				<TodoInsertContainer />
-					<TodoNav />
-					<TodoListContainer />
-				<TodoFooterContainer />
+			<TodoInsertContainer />
+			<TodoNav />
+			<TodoListContainer />
+			<TodoFooterContainer />
 		</TodoTemplate>
 	);
 };

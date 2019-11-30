@@ -1,33 +1,30 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import './TodoInsert.scss';
 
-const TodoInsert = ({ onCreate }: any) => {
-	const [value, setValue] = useState('');
+type Props = {
+	input: string;
+	onCreate(content: string): void;
+	onChangeInput(input: string): void;
+};
 
-	const onChangeInput = useCallback(
-		(e: React.ChangeEvent<HTMLInputElement>): void => {
-			setValue(e.target.value);
-		},
-		[],
-	);
-
+const TodoInsert = ({ input, onCreate, onChangeInput }: Props) => {
 	const onSubmitForm = useCallback(
 		(e: React.FormEvent): void => {
 			e.preventDefault();
-			if (!value.trim()) return;
-			onCreate(value);
-			setValue('');
+			onCreate(input);
 		},
-		[onCreate, value],
+		[onCreate, input],
 	);
+
+	const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => onChangeInput(e.target.value);
 
 	return (
 		<form onSubmit={onSubmitForm}>
 			<input
 				className="input-todo"
 				placeholder="What needs to be done?"
-				value={value}
-				onChange={onChangeInput}
+				value={input}
+				onChange={onChange}
 				autoFocus
 			/>
 		</form>

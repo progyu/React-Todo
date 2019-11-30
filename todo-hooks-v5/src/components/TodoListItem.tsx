@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import TodoToggle from './TodoToggle';
 import './TodoListItem.scss';
 import { Todo } from '../modules/todos';

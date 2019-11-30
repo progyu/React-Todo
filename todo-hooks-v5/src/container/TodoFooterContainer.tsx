@@ -10,11 +10,11 @@ type Props = {
 	removeAll(): void;
 };
 
-const TodoFooterContainer: React.SFC<Props> = ({
+const TodoFooterContainer = ({
 	todos,
 	toggleAll,
 	removeAll,
-}) => {
+}: Props) => {
 	return (
 		<TodoFooter todos={todos} onToggleAll={toggleAll} onRemoveAll={removeAll} />
 	);

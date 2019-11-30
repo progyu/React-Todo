@@ -8,7 +8,7 @@ type Props = {
 	nav: Navs
 }
 
-const TodoList: React.SFC<Props> = ({ todos, nav }) => {
+const TodoList = ({ todos, nav }: Props) => {
 
 	const filterTodoList = useCallback((): Todo[] => {
 		return todos.filter((todo: Todo) => {

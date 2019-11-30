@@ -1,27 +1,24 @@
 export type Navs = 'All' | 'Active' | 'Completed';
 export type NavState = {
-	nav: Navs
-}
+	nav: Navs;
+};
 
-type NavAction = { type: 'TAB'; navItem: Navs };
+export const TAB = 'navs/TAB';
 
-const TAB = 'navs/TAB';
+export type NavAction = { type: typeof TAB; navItem: Navs };
 
 export const tab = (navItem: Navs) => ({ type: TAB, navItem });
 
 const initialState: NavState = {
-	nav: 'All'
-}
+	nav: 'All',
+};
 
-export function navsReducer(
-	state = initialState,
-	action: NavAction,
-): Navs {
+export function navsReducer(state = initialState, action: NavAction): NavState {
 	switch (action.type) {
-		case 'TAB':
-			return (state.nav = action.navItem);
+		case TAB:
+			return {...state, nav: state.nav = action.navItem};
 
 		default:
-			throw new Error('Unhandled action');
+			return state;
 	}
 }

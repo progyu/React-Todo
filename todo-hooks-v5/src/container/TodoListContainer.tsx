@@ -5,30 +5,20 @@ import { Todo } from '../modules/todos';
 import { Navs } from '../modules/navs';
 
 type Props = {
-	todos: Todo[],
-	nav: Navs
-}
+	todos: Todo[];
+	nav: Navs;
+};
 
-const TodoListContainer: React.SFC<Props> = (
-	{ todos, nav },
-) => {
-	console.log(todos);
-	console.log(nav);
-	return (
-		<TodoList
-			todos={todos}
-			nav={nav}
-		/>
-	);
+const TodoListContainer = ({ todos, nav }: Props) => {
+	return <TodoList todos={todos} nav={nav} />;
 };
 
 const mapStateToProps = (state: any) => ({
-  todos: state.todos.todos,
-  nav: state.nav
+	todos: state.todos.todos,
+	nav: state.navs.nav,
 });
 
-const mapDispatchToProps = (dispatch: any) => ({
-})
+const mapDispatchToProps = (dispatch: any) => ({});
 
 export default connect(
 	mapStateToProps,

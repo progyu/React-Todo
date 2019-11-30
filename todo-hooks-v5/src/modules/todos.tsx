@@ -105,7 +105,7 @@ export function todosReducer(state = initialState, action: Action): TodosState {
 		case CHANGEINPUT:
 			return {
 				...state,
-				todos: state.todos.filter(todo => todo.completed !== true),
+				input: action.input,
 			};
 
 		default:

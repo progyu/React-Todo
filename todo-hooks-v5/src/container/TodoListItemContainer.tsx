@@ -10,8 +10,8 @@ type Props = {
 	remove(id: number): void,
 }
 
-const TodoListItemContainer: React.SFC<Props> = (
-	{ todo ,toggle, remove },
+const TodoListItemContainer = (
+	{ todo ,toggle, remove }: Props,
 ) => {
 	return (
 		<TodoListItem
