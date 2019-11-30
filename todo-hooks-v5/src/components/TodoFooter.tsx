@@ -1,36 +1,17 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback } from 'react';
 import TodoToggle from './TodoToggle';
-import { useTodosState, useTodosDispatch } from '../contexts/context';
+import { Todo } from '../modules/todos';
 import './TodoFooter.scss';
 
-const TodoFooter = () => {
-	const todos = useTodosState();
-	const dispatch = useTodosDispatch();
+const TodoFooter = ({todos, onToggleAll, onRemoveAll }: any) => {
 
 	const getCompleted = useCallback((): number => {
-		return todos.filter(todo => todo.completed === true).length;
+		return todos.filter((todo: Todo) => todo.completed === true).length;
 	}, [todos]);
 
 	const getLefted = useCallback((): number => {
-		return todos.filter(todo => todo.completed !== true).length;
+		return todos.filter((todo: Todo) => todo.completed !== true).length;
 	}, [todos]);
-
-	const onToggleAll = useCallback(
-		(completed: boolean) => {
-			dispatch({
-				type: 'TOGGLEALL',
-				completed,
-			});
-		},
-		[dispatch],
-	);
-
-	const onClear = useCallback(() => {
-		dispatch({
-			type: 'REMOVEALL',
-			completed: true,
-		});
-	}, [dispatch]);
 
 	return (
 		<div className="footer">
@@ -44,7 +25,7 @@ const TodoFooter = () => {
 				<label htmlFor="ck-complete-all">Mark all as complete</label>
 			</div>
 			<div className="clear-completed">
-				<button className="btn" onClick={onClear}>
+				<button className="btn" onClick={onRemoveAll}>
 					Clear completed (
 					<span className="completed-todos">{getCompleted()}</span>)
 				</button>

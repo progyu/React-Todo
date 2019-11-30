@@ -5,7 +5,7 @@ const TodoTemplate = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<div className="container">
 			<h1 className="title">Todos</h1>
-			<div className="ver">4.0</div>
+			<div className="ver">5.0</div>
 			<div>{children}</div>
 		</div>
 	);

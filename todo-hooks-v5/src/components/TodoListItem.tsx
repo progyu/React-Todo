@@ -1,40 +1,21 @@
-import React, { useContext, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import TodoToggle from './TodoToggle';
 import './TodoListItem.scss';
-import { useTodosDispatch, Todo } from '../contexts/context';
+import { Todo } from '../modules/todos';
 
-type TodoListProps = {
+type Props = {
 	todo: Todo;
+	onToggle(id: number): void;
+	onRemove(id: number): void;
 };
 
-const TodoListItem = ({ todo }: TodoListProps) => {
-	const dispatch = useTodosDispatch();
+const TodoListItem = ({ todo, onToggle, onRemove }: Props) => {
 	const { id, content, completed } = todo;
-
-	const onToggle = useCallback(
-		(id: number) => {
-			dispatch({
-				type: 'TOGGLE',
-				id,
-			});
-		},
-		[dispatch],
-	);
-
-	const onRemove = useCallback(
-		(id: number) => {
-			dispatch({
-				type: 'REMOVE',
-				id,
-			});
-		},
-		[dispatch],
-	);
 
 	return (
 		<li id={`${id}`} className="todo-item">
 			<TodoToggle
-				id={`ck-${todo.id}`}
+				id={`ck-${id}`}
 				onChange={() => onToggle(id)}
 				checked={completed}
 			/>

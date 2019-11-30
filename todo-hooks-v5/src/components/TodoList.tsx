@@ -1,23 +1,27 @@
 import React, { useCallback } from 'react';
-import TodoListItem from './TodoListItem';
-import { useTodosState, useNavsState, Todo } from '../contexts/context';
+import TodoListItemContainer from '../container/TodoListItemContainer';
+import { Todo } from '../modules/todos';
+import { Navs } from '../modules/navs';
 
-const TodoList = () => {
-	const todos = useTodosState();
-	const navState = useNavsState();
+type Props = {
+	todos: Todo[],
+	nav: Navs
+}
+
+const TodoList: React.SFC<Props> = ({ todos, nav }) => {
 
 	const filterTodoList = useCallback((): Todo[] => {
 		return todos.filter((todo: Todo) => {
-			if (navState === 'Active') return !todo.completed;
-			if (navState === 'Completed') return todo.completed;
+			if (nav === 'Active') return !todo.completed;
+			if (nav === 'Completed') return todo.completed;
 			return true;
 		});
-	}, [todos, navState]);
+	}, [todos, nav]);
 
 	return (
 		<ul className="todos">
 			{filterTodoList().map((todo: Todo) => (
-				<TodoListItem key={todo.id} todo={todo} />
+				<TodoListItemContainer key={todo.id} todo={todo} />
 			))}
 		</ul>
 	);

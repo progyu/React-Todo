@@ -1,10 +1,8 @@
-import React, { useState, useRef, useCallback } from 'react';
-import { useTodosDispatch } from '../contexts/context';
+import React, { useState, useCallback } from 'react';
 import './TodoInsert.scss';
 
-const TodoInsert = () => {
+const TodoInsert = ({ onCreate }: any) => {
 	const [value, setValue] = useState('');
-	const dispatch = useTodosDispatch();
 
 	const onChangeInput = useCallback(
 		(e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -13,24 +11,14 @@ const TodoInsert = () => {
 		[],
 	);
 
-	const onInsert = useCallback(
-		(content: string) => {
-			dispatch({
-				type: 'CREATE',
-				content,
-			});
-		},
-		[dispatch],
-	);
-
 	const onSubmitForm = useCallback(
 		(e: React.FormEvent): void => {
 			e.preventDefault();
 			if (!value.trim()) return;
-			onInsert(value);
+			onCreate(value);
 			setValue('');
 		},
-		[onInsert, value],
+		[onCreate, value],
 	);
 
 	return (

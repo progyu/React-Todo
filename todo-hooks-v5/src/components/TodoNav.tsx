@@ -1,15 +1,15 @@
 import React from 'react';
-import TodoNavItem from './TodoNavItem';
-import { NavState } from '../contexts/context';
+import TodoNavItemContainer from '../container/TodoNavItemContainer';
 import './TodoNav.scss';
+import { Navs } from '../modules/navs';
 
 const TodoNav = () => {
-	const navItems: NavState[] = ['All', 'Active', 'Completed'];
+	const navItems: Navs[] = ['All', 'Active', 'Completed'];
 
 	return (
 		<ul className="nav">
 			{navItems.map(navItem => (
-				<TodoNavItem key={navItem} navItem={navItem} />
+				<TodoNavItemContainer key={navItem} navItem={navItem} />
 			))}
 		</ul>
 	);

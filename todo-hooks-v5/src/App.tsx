@@ -1,26 +1,20 @@
 import React from 'react';
 
 import TodoTemplate from './components/TodoTemplate';
-import TodoInsert from './components/TodoInsert';
+import TodoInsertContainer from './container/TodoInsertContainer';
 import TodoNav from './components/TodoNav';
-import TodoList from './components/TodoList';
-import TodoFooter from './components/TodoFooter';
-
-import { TodosContextProvider, NavsContextProvider } from './contexts/context';
+import TodoListContainer from './container/TodoListContainer';
+import TodoFooterContainer from './container/TodoFooterContainer';
 
 import './App.css';
 
 const App = () => {
 	return (
 		<TodoTemplate>
-			<TodosContextProvider>
-				<TodoInsert />
-				<NavsContextProvider>
+				<TodoInsertContainer />
 					<TodoNav />
-					<TodoList />
-				</NavsContextProvider>
-				<TodoFooter />
-			</TodosContextProvider>
+					<TodoListContainer />
+				<TodoFooterContainer />
 		</TodoTemplate>
 	);
 };
