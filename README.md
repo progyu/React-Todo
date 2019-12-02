@@ -13,7 +13,7 @@ v3 : Context API를 사용, Sass 적용.
 
 v4 : TypeScript 적용, styled-components 라이브러리 사용.
 
-v5 : redux, mobx 적용.
+v5 : redux, react-redux, Redux-DevTools 사용, Ducks 패턴.
 
 ---
 
