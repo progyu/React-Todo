@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Dispatch, AnyAction } from 'redux';
 
 import TodoNavItem from '../components/TodoNavItem';
 import { RootState } from '../modules';
@@ -16,17 +15,11 @@ const TodoNavItemContainer = ({ tab, navItem, nav }: Props) => {
 	return <TodoNavItem navItem={navItem} tab={tab} nav={nav} />;
 };
 
-const mapStateToProps = (state: RootState) => ({
-	nav: state.navs.nav,
-});
-
-const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
-	tab: (navItem: Navs) => {
-		dispatch(tab(navItem));
-	},
-});
-
 export default connect(
-	mapStateToProps,
-	mapDispatchToProps,
+	({ navs }: RootState) => ({
+		nav: navs.nav,
+	}),
+	{
+		tab,
+	},
 )(TodoNavItemContainer);

@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Dispatch, AnyAction } from 'redux';
 
 import TodoInsert from '../components/TodoInsert';
 import { RootState } from '../modules';
@@ -18,22 +17,13 @@ const TodoInsertContainer = ({ create, changeInput, input }: Props) => {
 	);
 };
 
-const mapStateToProps = (state: RootState) => ({
-	// rootReducer...?
-	todos: state.todos.todos,
-	input: state.todos.input,
-});
-
-const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
-	create: (content: string) => {
-		dispatch(create(content));
-	},
-	changeInput: (input: string) => {
-		dispatch(changeInput(input));
-	},
-});
-
 export default connect(
-	mapStateToProps,
-	mapDispatchToProps,
+	({ todos }: RootState) => ({
+		todos: todos.todos,
+		input: todos.input,
+	}),
+	{
+		create,
+		changeInput,
+	},
 )(TodoInsertContainer);

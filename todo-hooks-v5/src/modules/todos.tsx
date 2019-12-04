@@ -21,7 +21,7 @@ export type Action =
 	| { type: typeof TOGGLE; id: number }
 	| { type: typeof REMOVE; id: number }
 	| { type: typeof TOGGLEALL; completed: boolean }
-	| { type: typeof REMOVEALL; completed: boolean }
+	| { type: typeof REMOVEALL }
 	| { type: typeof CHANGEINPUT; input: string };
 
 let id = 4;

@@ -15,11 +15,7 @@ const TodoListContainer = ({ todos, nav }: Props) => {
 	return <TodoList todos={todos} nav={nav} />;
 };
 
-const mapStateToProps = (state: RootState) => ({
-	todos: state.todos.todos,
-	nav: state.navs.nav,
-});
-
-export default connect(
-	mapStateToProps,
-)(TodoListContainer);
+export default connect(({ todos, navs }: RootState) => ({
+	todos: todos.todos,
+	nav: navs.nav,
+}))(TodoListContainer);

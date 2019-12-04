@@ -11,6 +11,7 @@ const TodoInsert = ({ input, onCreate, onChangeInput }: Props) => {
 	const onSubmitForm = useCallback(
 		(e: React.FormEvent): void => {
 			e.preventDefault();
+			if(!(input.trim())) return;
 			onCreate(input);
 		},
 		[onCreate, input],
