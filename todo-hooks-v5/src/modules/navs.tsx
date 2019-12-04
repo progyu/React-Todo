@@ -16,7 +16,7 @@ const initialState: NavState = {
 export function navsReducer(state = initialState, action: NavAction): NavState {
 	switch (action.type) {
 		case TAB:
-			return {...state, nav: state.nav = action.navItem};
+			return { ...state, nav: state.nav = action.navItem };
 
 		default:
 			return state;

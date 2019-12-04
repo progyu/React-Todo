@@ -16,7 +16,8 @@ const TodoInsert = ({ input, onCreate, onChangeInput }: Props) => {
 		[onCreate, input],
 	);
 
-	const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => onChangeInput(e.target.value);
+	const onChange = (e: React.ChangeEvent<HTMLInputElement>): void =>
+		onChangeInput(e.target.value);
 
 	return (
 		<form onSubmit={onSubmitForm}>

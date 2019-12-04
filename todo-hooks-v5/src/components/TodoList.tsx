@@ -4,12 +4,11 @@ import { Todo } from '../modules/todos';
 import { Navs } from '../modules/navs';
 
 type Props = {
-	todos: Todo[],
-	nav: Navs
-}
+	todos: Todo[];
+	nav: Navs;
+};
 
 const TodoList = ({ todos, nav }: Props) => {
-
 	const filterTodoList = useCallback((): Todo[] => {
 		return todos.filter((todo: Todo) => {
 			if (nav === 'Active') return !todo.completed;
